@@ -1,0 +1,21 @@
+{
+  "name": "06-poc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ball.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gsap": "^3.8.0",
+    "three": "^0.135.0"
+  },
+  "devDependencies": {
+    "vite": "^2.7.1"
+  }
+}
