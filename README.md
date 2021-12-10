@@ -2,6 +2,12 @@
 
 `npm i && npm run dev`
 
+## Demo
+
+[View on Netlify](https://bouncy-bouncy.netlify.app/)
+
+[View on Codesandbox](https://codesandbox.io/s/bouncy-bouncy-lltok)
+
 ```
 Rubber ball, I come bouncin' back to you
 Rubber ball, I come bouncin' back to you
