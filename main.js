@@ -20,13 +20,13 @@ const scene = new THREE.Scene()
   const objLoader = new OBJLoader()
   const url = 'ball.mtl'
 
-  mtlLoader.setPath('Ball/')
+  mtlLoader.setPath('/Ball/')
 
   mtlLoader.load(url, (materials) => {
     materials.preload()
 
     objLoader.setMaterials(materials)
-    objLoader.setPath('Ball/')
+    objLoader.setPath('/Ball/')
     objLoader.load(
       'ball.obj',
       (ball) => {
