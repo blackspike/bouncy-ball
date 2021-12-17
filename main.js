@@ -1,7 +1,7 @@
 import './main.css'
-import gsap from 'gsap'
+// import gsap from 'gsap'
 import * as THREE from 'three'
-// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
 
@@ -16,48 +16,43 @@ const scene = new THREE.Scene()
  * Model & gsap animation
  */
 
-  const mtlLoader = new MTLLoader()
-  const objLoader = new OBJLoader()
-  const url = 'ball.mtl'
-
-  mtlLoader.setPath('/Ball/')
-
-  mtlLoader.load(url, (materials) => {
-    materials.preload()
-
-    objLoader.setMaterials(materials)
-    objLoader.setPath('/Ball/')
-    objLoader.load(
-      'ball.obj',
-      (ball) => {
-        scene.add(ball)
-
-        const tl = gsap.timeline({
-          defaults: { duration: 2.5, ease: 'Bounce.easeOut' },
-          onComplete: function () {
-            this.restart()
-          },
-        })
-        const tlRot = gsap.timeline({
-          defaults: { duration: 2.5 },
-          onComplete: function () {
-            this.restart()
-          },
-        })
-
-        tl.to(ball.position, { x: 0, y: -.2, z: 3 })
-          .to(ball.position, { x: -2, y: 0, z: 0 })
-          .to(ball.position, { x: 2, y: 0, z: 0 })
-          .to(ball.position, { x: 0, y: 0, z: 0, ease: 'ease.easeOut'  })
-
-        tlRot.to(ball.rotation, { x: 0, y: 0, z: 0 })
-          .to(ball.rotation, { x: Math.PI, y: Math.PI, z: Math.PI })
-
-
-      },
-    )
+// Leaf
+const leafMtlLoader = new MTLLoader()
+const leafObjLoader = new OBJLoader()
+leafMtlLoader.load('/Leaf/leaf-2.mtl', (materials) => {
+  materials.preload()
+  leafObjLoader.setMaterials(materials)
+  leafObjLoader.load('/Leaf/leaf-2.obj', (object) => {
+    scene.add(object)
+    object.position.x = -2.2
   })
+})
 
+// Football
+const footballMtlLoader = new MTLLoader()
+const footballObjLoader = new OBJLoader()
+footballMtlLoader.load('/Football/football.mtl', (materials) => {
+  materials.preload()
+  footballObjLoader.setMaterials(materials)
+  footballObjLoader.load('/Football/football.obj', (object) => {
+    scene.add(object)
+    object.position.x = 2.2
+  })
+})
+
+// Birdarang
+const birdarangMtlLoader = new MTLLoader()
+const birdarangObjLoader = new OBJLoader()
+birdarangMtlLoader.load('/Birdarang/birdarang.mtl', (materials) => {
+  materials.preload()
+  console.log(materials)
+
+  birdarangObjLoader.setMaterials(materials)
+  birdarangObjLoader.load('/Birdarang/birdarang.obj', (object) => {
+    scene.add(object)
+    object.position.x = 0
+  })
+})
 /**
  * Sizes
  */
@@ -88,29 +83,32 @@ window.addEventListener('resize', () =>
 // Base camera
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100)
 camera.position.x = 0
-camera.position.y = 0
-camera.position.z = 4
+camera.position.y = 5
+camera.position.z = 0
 scene.add(camera)
 
 
 // Controls
-// const controls = new OrbitControls(camera, canvas)
-// controls.enableDamping = true
+const controls = new OrbitControls(camera, canvas)
+controls.enableDamping = true
+controls.autoRotate = true
 
 /**
  * Lights
  */
 
-const backlight = new THREE.DirectionalLight(0xffffff, 1)
-backlight.position.set(0,0,0)
-backlight.castShadow = true
-backlight.shadow.mapSize.width = 1024
-backlight.shadow.mapSize.height = 1024
-scene.add(backlight)
+// const sunLight = new THREE.DirectionalLight('#ffffff', 10)
+// sunLight.castShadow = true
+// sunLight.shadow.camera.far = 15
+// sunLight.shadow.mapSize.set(1024, 1024)
+// sunLight.shadow.normalBias = 0.05
+// sunLight.position.set(10,10,10)
+// scene.add(sunLight)
 
-const light = new THREE.AmbientLight(0xffffff, 1.5) // soft white light
+
+const light = new THREE.AmbientLight(0xffffff, 1) // soft white light
 scene.add(light)
-scene.background = new THREE.Color(0x0d4db5)
+scene.background = new THREE.Color(0xffffff)
 
 
 /**
@@ -120,6 +118,7 @@ const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
     antialias: true
 })
+renderer.setClearColor(0xffffff)
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
@@ -133,7 +132,7 @@ const tick = () =>
     const elapsedTime = clock.getElapsedTime()
 
     // Update controls
-    // controls.update()
+    controls.update()
 
     // Render
     renderer.render(scene, camera)
