@@ -21,10 +21,10 @@ scene.add(group)
 // Leaf
 const leafMtlLoader = new MTLLoader()
 const leafObjLoader = new OBJLoader()
-leafMtlLoader.load('/Leaf/leaf-2.mtl', (materials) => {
+leafMtlLoader.load('/Leaf/leaf.mtl', (materials) => {
   materials.preload()
   leafObjLoader.setMaterials(materials)
-  leafObjLoader.load('/Leaf/leaf-2.obj', (object) => {
+  leafObjLoader.load('/Leaf/leaf.obj', (object) => {
     group.add(object)
     object.position.x = -2.2
   })
