@@ -11,6 +11,8 @@ const canvas = document.getElementById('canvas')
 
 // Scene
 const scene = new THREE.Scene()
+const group = new THREE.Group()
+scene.add(group)
 
 /**
  * Model & gsap animation
@@ -23,7 +25,7 @@ leafMtlLoader.load('/Leaf/leaf-2.mtl', (materials) => {
   materials.preload()
   leafObjLoader.setMaterials(materials)
   leafObjLoader.load('/Leaf/leaf-2.obj', (object) => {
-    scene.add(object)
+    group.add(object)
     object.position.x = -2.2
   })
 })
@@ -35,7 +37,7 @@ footballMtlLoader.load('/Football/football.mtl', (materials) => {
   materials.preload()
   footballObjLoader.setMaterials(materials)
   footballObjLoader.load('/Football/football.obj', (object) => {
-    scene.add(object)
+    group.add(object)
     object.position.x = 2.2
   })
 })
@@ -49,7 +51,7 @@ birdarangMtlLoader.load('/Birdarang/birdarang.mtl', (materials) => {
 
   birdarangObjLoader.setMaterials(materials)
   birdarangObjLoader.load('/Birdarang/birdarang.obj', (object) => {
-    scene.add(object)
+    group.add(object)
     object.position.x = 0
   })
 })
@@ -71,10 +73,14 @@ window.addEventListener('resize', () =>
     camera.aspect = sizes.width / sizes.height
     camera.updateProjectionMatrix()
 
+    // Update group
+    group.scale.set(sizes.width / 2000, sizes.width / 2000, sizes.width / 2000)
+
     // Update renderer
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
+group.scale.set(sizes.width / 2000, sizes.width / 2000, sizes.width / 2000)
 // const axesHelper = new THREE.AxesHelper(5)
 // scene.add(axesHelper)
 /**
