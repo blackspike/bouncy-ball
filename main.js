@@ -74,8 +74,8 @@ darwinMtlLoader.load('/Darwin/darwin.mtl', (materials) => {
     const darwin = object.children.find((child) => child.name === 'Darwin_face')
 
     darwin.position.y = -.2
-    gsap.to(darwin.position, { y: 1.2, duration: .3, repeat: -1, yoyo: true, ease: 'bounce.easeInOut' })
-    gsap.to(darwin.rotation, { x: -.2, duration: .3, repeat: -1, yoyo: true, ease: 'bounce.easeInOut' })
+    gsap.to(darwin.position, { y: 1.2, duration: .5, repeat: -1, yoyo: true, ease: 'bounce.easeInOut' })
+    gsap.to(darwin.rotation, { x: -.2, duration: .5, repeat: -1, yoyo: true, ease: 'bounce.easeInOut' })
   })
 })
 
