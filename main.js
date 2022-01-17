@@ -57,7 +57,7 @@ birdarangMtlLoader.load('/Birdarang/birdarang.mtl', (materials) => {
 // Darwin
 const darwinMtlLoader = new MTLLoader()
 const darwinObjLoader = new OBJLoader()
-darwinMtlLoader.load('/Darwin/darwin-test/darwin-alt.mtl', (materials) => {
+darwinMtlLoader.load('/Darwin/darwin-alt/darwin-alt.mtl', (materials) => {
   materials.preload()
 
   materials.materials.fishbowl.transparent = true
@@ -66,7 +66,7 @@ darwinMtlLoader.load('/Darwin/darwin-test/darwin-alt.mtl', (materials) => {
   materials.materials.water.opacity = 0.6
 
   darwinObjLoader.setMaterials(materials)
-  darwinObjLoader.load('/Darwin/darwin-test/darwin-alt.obj', (object) => {
+  darwinObjLoader.load('/Darwin/darwin-alt/darwin-alt.obj', (object) => {
     group.add(object)
     object.position.z = 1
 
