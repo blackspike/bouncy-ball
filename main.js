@@ -57,25 +57,24 @@ birdarangMtlLoader.load('/Birdarang/birdarang.mtl', (materials) => {
 // Darwin
 const darwinMtlLoader = new MTLLoader()
 const darwinObjLoader = new OBJLoader()
-darwinMtlLoader.load('/Darwin/darwin.mtl', (materials) => {
+darwinMtlLoader.load('/Darwin/darwin-test/darwin-alt.mtl', (materials) => {
   materials.preload()
 
   materials.materials.fishbowl.transparent = true
-  materials.materials.fishbowl.opacity = .3
+  materials.materials.fishbowl.opacity = 0.3
   materials.materials.water.transparent = true
-  materials.materials.water.opacity = .6
-
+  materials.materials.water.opacity = 0.6
 
   darwinObjLoader.setMaterials(materials)
-  darwinObjLoader.load('/Darwin/darwin.obj', (object) => {
+  darwinObjLoader.load('/Darwin/darwin-test/darwin-alt.obj', (object) => {
     group.add(object)
     object.position.z = 1
 
     const darwin = object.children.find((child) => child.name === 'Darwin_face')
 
-    darwin.position.y = -.2
-    gsap.to(darwin.position, { y: 1.2, duration: .5, repeat: -1, yoyo: true, ease: 'bounce.easeInOut' })
-    gsap.to(darwin.rotation, { x: -.2, duration: .5, repeat: -1, yoyo: true, ease: 'bounce.easeInOut' })
+    darwin.position.y = -0.2
+    gsap.to(darwin.position, { y: 1.2, duration: 0.5, repeat: -1, yoyo: true, ease: 'bounce.easeInOut' })
+    gsap.to(darwin.rotation, { x: -0.2, duration: 0.5, repeat: -1, yoyo: true, ease: 'bounce.easeInOut' })
   })
 })
 
